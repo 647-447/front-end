@@ -1,4 +1,4 @@
-console.clear();
+import { getLocation } from 'locator.js';
 
 let state = {};
 
@@ -45,7 +45,7 @@ const next = function(boolean) {
     wrapper.innerHTML = "";
     wrapper.appendChild(text);
     
-    //wait 3 seconds
+    //wait 3 seconds then forward to the maps page
   }
 }
 
