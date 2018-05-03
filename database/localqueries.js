@@ -9,8 +9,6 @@ const knex = require('knex')({
   });
 
 const addVictim = function(phone, name, lat, lng, injured, stuck, last_seen, priority) {
-  console.log("insert requested for addVictim");
-
 	return knex('victims').insert({phone, name, lat, lng, injured, stuck, last_seen, priority}).then(()=> console.log(`victim added successfully`)).catch((error)=> console.error(error));
 }
 

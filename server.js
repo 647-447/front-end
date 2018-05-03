@@ -1,39 +1,52 @@
 var queries = require('./database/localqueries.js');
-
+var bodyParser = require('body-parser')
 var express = require('express');
+
+const port = process.env.PORT || 3000;
 
 var app = express();
 
-const port = process.env.PORT || 3000;
+app.use(bodyParser.json());
 
 app.use('/', express.static('./home'));
 app.use('/map', express.static('./map'));
 
 app.post('/victims', function (req, res) {
-	queries.addVictim('5554443333', 'John Doe', '37.4', '-122.2', 'false', 'false', '2018-05-02 18:24:12', '1').then((entry, err) => {
+
+	const {inDangerZone, isStuck, isInjured } = req.body;
+
+	console.log("req.body.inDangerZone: ", inDangerZone);
+	console.log("req.body.isStuck: ", isStuck);
+	console.log("req.body.isInjured: ", isInjured);
+
+
+	queries.addVictim('3332221111', 'Wilson', '37.2', '-123.2', inDangerZone, isInjured, isStuck, '2').then((entry, err) => {
 		if(err) { throw (err) }
-		res.send('victim added to the database:' , entry);
+		res.status(201).send('victim added to the database:' + entry);
 	});
+
 })
 
 app.post('/status', function (req, res) {
-	queries.addVictimStatus('4153358620', 'Is anybody out there?').then((entry, err) => {
+	queries.addVictimStatus('3332221111', 'I think I am okay, where do I go now?').then((entry, err) => {
 		if(err) { throw (err) }
-		res.send('victim status added to the database:' , entry);
+			res.status(201).send('victim status added to the database:' + entry);
 	});
 })
 
 app.get('/victims', function (req, res) {
+	console.log('victims requested by user');
 	queries.getVictims().then((entry, err) => {
 		if(err) { throw (err) }
-		res.send(entry);
+		res.status(200).send(entry);
 	});
 });
 
 app.get('/status', function (req, res) {
+	console.log('status requested by user');
 	queries.getVictimStatus().then((entry, err) => {
 		if(err) { throw (err) }
-		res.send(entry);
+		res.status(200).send(entry);
 	});
 });
 

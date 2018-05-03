@@ -1,6 +1,20 @@
 var map;
 var myLatLng = {lat: 37.5497, lng: -122.0811};
 
+// to source data from database
+const httpGetAsync = function(theUrl, callback)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          callback(xmlHttp.responseText);
+        }     
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+}
+
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {

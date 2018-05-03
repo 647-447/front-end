@@ -1,9 +1,16 @@
 let state = {};
 
+const httpPostVictim = function(theUrl, body) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", theUrl, true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify(body));
+}
+
 let form = [
   {
-    question: "Are you Hurt?",
-    key: "needsMedicalAssistance"
+    question: "Are you Injured?",
+    key: "isInjured"
   },
   {
     question: "Are you stuck?",
@@ -43,6 +50,7 @@ const next = function(boolean) {
     wrapper.innerHTML = "";
     wrapper.appendChild(text);
 
+    httpPostVictim("http://localhost:3000/victims", state);
     //wait 2 seconds then forward to the maps page
     setTimeout(() => window.open("http://localhost:3000/map", "_self"), 2000);
   }
