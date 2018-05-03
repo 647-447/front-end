@@ -9,20 +9,27 @@ const knex = require('knex')({
   });
 
 const addVictim = function(phone, name, lat, lng, injured, stuck, last_seen, priority) {
-	knex('contacts').insert({phone:phone, name:name, lat:lat, lng:lng, injured:injured, stuck:stuck, last_seen:last_seen, priority:priority}).then(()=> console.log(`victim added successfully`)).catch((error)=> console.error(error));
+  console.log("insert requested for addVictim");
+
+	return knex('victims').insert({phone, name, lat, lng, injured, stuck, last_seen, priority}).then(()=> console.log(`victim added successfully`)).catch((error)=> console.error(error));
 }
 
 const addVictimStatus = function(phone, note) {
-  knex('contacts').insert({phone: phone, note: note}).then(()=> console.log(`victim status updated successfully`)).catch((error)=> console.error(error));
+  return knex('status').insert({phone, note}).then(()=> console.log(`victim status updated successfully`)).catch((error)=> console.error(error));
 }
 
-/*
- const getVictim
- const getVictimStatus
-*/
+const getVictims = function() {
+  return knex('victims').select();
+}
+
+const getVictimStatus = function() {
+  return knex('status').select();
+}
 
 module.exports = {
   knex: knex,
   addVictim: addVictim,
-  addVictimStatus: addVictimStatus
+  addVictimStatus: addVictimStatus,
+  getVictims: getVictims,
+  getVictimStatus: getVictimStatus
 };

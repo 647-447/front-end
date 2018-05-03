@@ -23,5 +23,6 @@ const addVictimStatus = function(phone, note) {
 
 module.exports = {
   knex: knex,
-  insert: insert
+  addVictim: addVictim,
+  addVictimStatus: addVictimStatus
 };
