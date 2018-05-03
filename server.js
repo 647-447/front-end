@@ -10,13 +10,16 @@ app.use('/', express.static('./home'));
 app.use('/map', express.static('./map'));
 
 app.post('/victims', function (req, res) {
-	queries.addVictim('5554443333', 'John Doe', '37.4', '-122.2', 'false', 'false', '2018-05-02 18:24:12', '1').then(res.send('POST request to the getaway victims table requested'));
+	queries.addVictim('5554443333', 'John Doe', '37.4', '-122.2', 'false', 'false', '2018-05-02 18:24:12', '1').then((entry, err) => {
+		if(err) { throw (err) }
+		res.send('victim added to the database:' , entry);
+	});
 })
 
 app.post('/status', function (req, res) {
 	queries.addVictimStatus('4153358620', 'Is anybody out there?').then((entry, err) => {
 		if(err) { throw (err) }
-		res.send('POST request to the getaway status table requested');
+		res.send('victim status added to the database:' , entry);
 	});
 })
 
