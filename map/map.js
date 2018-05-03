@@ -44,7 +44,7 @@ function initMap() {
       '<h1 id="firstHeading" class="firstHeading">Andre Nguyen</h1>'+
       '<div id="bodyContent">'+
       '<p><b>contact: </b><a href="tel:555-444-3333">555-444-3333</a></p>' +
-      '<p><b>status: </b>healthy</p>'+
+      '<p><b>status: </b>unharmed</p>'+
       '<p><b>requires extraction: </b>ASAP</p>'+
       '<p><b>last login: </b> 18:28 | 05/02/2018 | Pacific Time</p>'+
       '<p><b>Note: </b> I lost my boy Nuno in the explosion! I know he\'s still alive out there!</p>'
