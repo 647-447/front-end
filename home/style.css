@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>oshit</title>
-	<style type="text/css">
-		* {
+* {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+#map {
+  height: 100%;
 }
 
 body {
@@ -66,26 +65,3 @@ button {
   text-align: center;
   font-size: 30px;
 }
-	</style>
-</head>
-
-<body>
-	<div id="wrapper">
-  
-    <div class="question">
-      <p id="question">
-        Are you in a danger zone?
-      </p>
-    </div>
-
-    <div class="options">
-      <button id="yes" class="red">YES</button>
-      <button id="no" class="green">NO</button>
-    </div>
-
-	</div>
-</body>
-<footer>
-	<script src="../src/index.js"></script>
-</footer>
-</html>

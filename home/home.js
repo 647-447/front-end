@@ -1,14 +1,12 @@
-import { getLocation } from 'locator.js';
-
 let state = {};
 
 let form = [
   {
-    question: "Do you need rescuing?",
-    key: "needsRescue"
+    question: "Are You Hurt?",
+    key: "needsMedicalAssistance"
   },
   {
-    question: "Are you stuck?",
+    question: "Can You Move?",
     key: "isStuck"
   },
   {
@@ -44,8 +42,9 @@ const next = function(boolean) {
     const wrapper = document.getElementById("wrapper");
     wrapper.innerHTML = "";
     wrapper.appendChild(text);
-    
-    //wait 3 seconds then forward to the maps page
+
+    //wait 2 seconds then forward to the maps page
+    setTimeout(() => window.open("http://localhost:3000/map", "_self"), 2000);
   }
 }
 
