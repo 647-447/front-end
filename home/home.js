@@ -2,11 +2,11 @@ let state = {};
 
 let form = [
   {
-    question: "Are You Hurt?",
+    question: "Are you Hurt?",
     key: "needsMedicalAssistance"
   },
   {
-    question: "Can You Move?",
+    question: "Are you stuck?",
     key: "isStuck"
   },
   {
