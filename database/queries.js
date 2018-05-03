@@ -8,8 +8,8 @@ const knex = require('knex')({
     }
   });
 
-const addVictim = function(phone, name, lat, lng, inDangerZone, injured, stuck, priority) {
-  return knex('victims').insert({phone, name, lat, lng, inDangerZone, injured, stuck, priority}).then(()=> console.log(`victim added successfully`)).catch((error)=> console.error(error));
+const addVictim = function(phone, name, lat, lng, in_danger_zone, injured, stuck, priority) {
+  return knex('victims').insert({phone, name, lat, lng, in_danger_zone, injured, stuck, priority}).then(()=> console.log(`victim added successfully`)).catch((error)=> console.error(error));
 }
 
 const addVictimStatus = function(phone, note) {

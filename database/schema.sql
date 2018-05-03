@@ -7,7 +7,7 @@ CREATE TABLE victims (
 	name VARCHAR(50),
 	lat REAL NOT NULL,
 	lng REAL NOT NULL,
-	inDangerZone BOOLEAN NOT NULL,
+	in_danger_zone BOOLEAN NOT NULL,
 	injured BOOLEAN NOT NULL,
 	stuck BOOLEAN NOT NULL,
 	priority SMALLINT,
@@ -21,7 +21,7 @@ CREATE TABLE status (
 	posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 
-INSERT INTO victims(phone, name, lat, lng, inDangerZone, injured, stuck, priority) VALUES ('4153358620', 'Nuno Neves', '37.5497', '-122.081', 'true', 'true', 'true', '5');
+INSERT INTO victims(phone, name, lat, lng, in_danger_zone, injured, stuck, priority) VALUES ('4153358620', 'Nuno Neves', '37.5497', '-122.081', 'true', 'true', 'true', '5');
 
 INSERT INTO status(phone, note) VALUES ('4153358620', 'Losing lots of blood here! I am type A+');
 

@@ -19,8 +19,7 @@ app.post('/victims', function (req, res) {
 	console.log("req.body.isStuck: ", isStuck);
 	console.log("req.body.isInjured: ", isInjured);
 
-
-	queries.addVictim('3332221111', 'Wilson', '37.2', '-123.2', inDangerZone, isInjured, isStuck, '2').then((entry, err) => {
+	queries.addVictim('3332221111', 'Wilson', '37.2', '-123.2', inDangerZone, isInjured, isStuck).then((entry, err) => {
 		if(err) { throw (err) }
 		res.status(201).send('victim added to the database:' + entry);
 	});
