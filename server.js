@@ -14,12 +14,14 @@ app.use('/map', express.static('./map'));
 app.post('/victims', function (req, res) {
 
 	const {inDangerZone, isStuck, isInjured } = req.body;
+	const loc = JSON.parse(req.body.location);
+	console.log(loc);
 
 	console.log("req.body.inDangerZone: ", inDangerZone);
 	console.log("req.body.isStuck: ", isStuck);
 	console.log("req.body.isInjured: ", isInjured);
 
-	queries.addVictim('3332221111', 'Wilson', '37.2', '-123.2', inDangerZone, isInjured, isStuck).then((entry, err) => {
+	queries.addVictim('0123456789', 'user', loc[0] || '37.2',  loc[1] || '-123.2', inDangerZone, isInjured, isStuck).then((entry, err) => {
 		if(err) { throw (err) }
 		res.status(201).send('victim added to the database:' + entry);
 	});

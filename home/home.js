@@ -1,5 +1,8 @@
 let state = {};
 
+//from locator.js
+state.location = sessionStorage.getItem('NG_myLocation') || getLocation();
+
 const httpPostVictim = function(theUrl, body) {
   var xhr = new XMLHttpRequest();
   xhr.open("POST", theUrl, true);
@@ -51,6 +54,13 @@ const next = function(boolean) {
     wrapper.appendChild(text);
 
     httpPostVictim("http://localhost:3000/victims", state);
+
+    // super hacky at the moment - try to use promises instead
+    state.location = sessionStorage.getItem('NG_myLocation');
+
+    if(!state.location) {
+      console.log("we couldn't determine your location");
+    }
     //wait 2 seconds then forward to the maps page
     setTimeout(() => window.open("http://localhost:3000/map", "_self"), 2000);
   }

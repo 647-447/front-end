@@ -1,5 +1,12 @@
 var map;
-var myLatLng = {lat: 37.5497, lng: -122.0811};
+
+//TODO: handle exceptions
+const findPosition = function() {
+  const position = JSON.parse(sessionStorage.getItem('NG_myLocation'));
+  return {lat: position[0], lng: position[1]};
+};
+
+let myLatLng = findPosition();
 
 // to source data from database
 const httpGetAsync = function(theUrl, callback)
@@ -7,21 +14,21 @@ const httpGetAsync = function(theUrl, callback)
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-          callback(xmlHttp.responseText);
+          callback(JSON.parse(xmlHttp.responseText));
         }     
     }
     xmlHttp.open("GET", theUrl, true); // true for asynchronous 
     xmlHttp.send(null);
 }
 
+httpGetAsync("http://localhost:3000/victims", (results) => {
+  initMap(results);
+});
 
-function initMap() {
+function initMap(list) {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-          lat: 37.5497,
-          lng: -122.0811
-        },
-    zoom: 13,
+    center: myLatLng,
+    zoom: 10,
     disableDefaultUI: true,
     fullscreenControl: true,
     styles: styles
@@ -34,11 +41,45 @@ function initMap() {
     fillColor: '#FF0000',
     fillOpacity: 0.35,
     map: map,
-    center: myLatLng,
+    center: {lat: 37.5497, lng: -122.0811},
     radius: 1000
   });
 
+  var infowindow = new google.maps.InfoWindow();
 
+  // for every entry in the list
+  for(let i = 0; i < list.length; i++) {
+
+    let status = list[i].injured ? "injured" : "unharmed";
+    let extraction = list[i].stuck ? "ASAP" : "unnecessary";
+
+    let description = `<div id="content">
+      <div id="siteNotice">
+      </div>
+      <h1 id="firstHeading" class="firstHeading">${list[i].name}</h1>
+      <div id="bodyContent">
+      <p><b>contact: </b><a href="tel:${list[i].phone}">${list[i].phone}</a></p> 
+      <p><b>status: </b>${status}</p>
+      <p><b>requires extraction: </b>${extraction}</p>
+      <p><b>last login: </b> ${list[i].last_seen}</p>
+      <p><b>Note: </b> Source message from another query</p>
+      </div>
+      </div>`;
+
+      let newMarker = new google.maps.Marker({
+        position: {lat: list[i].lat, lng: list[i].lng},
+        map: map,
+        title: list[i].name,
+        info: description
+      });
+
+      newMarker.addListener('click', function() {
+        infowindow.setContent(newMarker.info);
+        infowindow.open(map, newMarker);
+      });
+  }
+
+  /*
   var id4153358620 = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
@@ -65,8 +106,6 @@ function initMap() {
       '</div>'+
       '</div>';
 
-  var infowindow = new google.maps.InfoWindow();
-
   var mk4153358620 = new google.maps.Marker({
     position: {lat: 37.5497, lng: -122.0811},
     map: map,
@@ -91,8 +130,6 @@ function initMap() {
     infowindow.open(map, mk5554443333);
   });
 
-
-
   google.maps.event.addListener(map, 'click', function(event) {
            placeCircle(event.latLng);
         });
@@ -112,4 +149,6 @@ function initMap() {
             radius: 200
           });
         }
+
+  */
 }

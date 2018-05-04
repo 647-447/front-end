@@ -1,4 +1,4 @@
-function getLocation() {
+unction getLocation() {
   console.log("getLocation initiated");
   
   const success = (position) => {
@@ -7,17 +7,15 @@ function getLocation() {
     
     sessionStorage.setItem('NG_myLocation', JSON.stringify([latitude,longitude]));
     console.log(`lat: ${latitude} | lon: ${longitude}`);
-    
-    update([latitude,longitude]);
   }
 
   const error = (err) => {
     
     if(err.message === "Timeout expired") {
-      console.log("Location service timed-out, please try again");
-      
+      console.log("Location service timed-out, trying again...");
+      getLocation();
     } else {
-      console.log("We can't track your location, please check your device's location settings");
+      console.log("Couldn't track your location. Please check your device's location settings.");
     }
     
     console.error(err);
@@ -37,5 +35,3 @@ function getLocation() {
     // then redirect to the maps page
   );
 }
-
-module.exports = { getLocation : getLocation }

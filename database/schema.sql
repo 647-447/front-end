@@ -3,7 +3,7 @@ CREATE DATABASE getaway;
 
 CREATE TABLE victims (
 	id SERIAL PRIMARY KEY,
-	phone VARCHAR(15),
+	phone VARCHAR(15) NOT NULL,
 	name VARCHAR(50),
 	lat REAL NOT NULL,
 	lng REAL NOT NULL,
@@ -24,6 +24,12 @@ CREATE TABLE status (
 INSERT INTO victims(phone, name, lat, lng, in_danger_zone, injured, stuck, priority) VALUES ('4153358620', 'Nuno Neves', '37.5497', '-122.081', 'true', 'true', 'true', '5');
 
 INSERT INTO status(phone, note) VALUES ('4153358620', 'Losing lots of blood here! I am type A+');
+
+
+INSERT INTO victims(phone, name, lat, lng, in_danger_zone, injured, stuck, priority) VALUES ('5554443333', 'Andre Nguyen', '37.5497', '-122.081', 'true', 'false', 'false', '2');
+
+INSERT INTO status(phone, note) VALUES ('5554443333', 'I lost my boy Nuno in the explosion! I know he\'s still alive out there!');
+
 
 /* 
 if postgreSQL is installed and psql is not working, open another window in the terminal and run the bash command:
