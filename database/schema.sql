@@ -34,6 +34,7 @@ INSERT INTO victims(phone, name, lat, lng, in_danger_zone, injured, stuck, prior
 
 
 /* STATUS */
+
 INSERT INTO status(phone, note) VALUES ('4153358620', 'Losing lots of blood here! I am type A+');
 
 INSERT INTO status(phone, note) VALUES ('5554443333', 'I lost my boy Nuno in the explosion! I know he\'s still alive out there!');
