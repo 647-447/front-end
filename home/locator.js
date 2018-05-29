@@ -1,4 +1,4 @@
-function getLocation() {
+const getLocation = function() {
   console.log("getLocation initiated");
   
   const success = (position) => {
@@ -33,4 +33,8 @@ function getLocation() {
     // make axios call to server HERE
     // then redirect to the maps page
   );
+}
+
+module.exports = {
+  getLocation : getLocation
 }
