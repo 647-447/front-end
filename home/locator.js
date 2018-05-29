@@ -1,4 +1,4 @@
-unction getLocation() {
+function getLocation() {
   console.log("getLocation initiated");
   
   const success = (position) => {
@@ -28,8 +28,7 @@ unction getLocation() {
   };
   
   console.log("starting navigator.geolocation.getCurrentPosition()")
-  navigator.geolocation.getCurrentPosition(success, error, options)
-    .then(
+  navigator.geolocation.getCurrentPosition(success, error, options).then(
     console.log("navigator returned: " + sessionStorage.getItem('NG_myLocation'))
     // make axios call to server HERE
     // then redirect to the maps page
